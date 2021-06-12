@@ -1,0 +1,20 @@
+{
+  "name": "bankend",
+  "version": "1.0.0",
+  "description": "Group III Backend Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Maria Mergal, Jorge Caridad and Chris Filippo",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.12.13",
+    "nodemon": "^2.0.7"
+  }
+}
