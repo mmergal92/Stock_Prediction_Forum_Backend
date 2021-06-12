@@ -4,7 +4,7 @@
   "description": "Group III Backend Server",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "dev": "nodemon server.js"
   },
   "author": "Maria Mergal, Jorge Caridad and Chris Filippo",
@@ -15,6 +15,8 @@
     "express": "^4.17.1",
     "method-override": "^3.0.0",
     "mongoose": "^5.12.13",
+    "node": "^16.3.0",
+    "node-fetch": "^2.6.1",
     "nodemon": "^2.0.7"
   }
 }

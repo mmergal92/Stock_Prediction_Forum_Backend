@@ -7,12 +7,18 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const fetch = require("node-fetch");
 const methodOverride = require("method-override");
 require('dotenv').config();
+
 
 // Create App Object
 
 const app = express();
+
+//Importing Models
+
+const hDataStock = require('./models/hDataStock');
 
 // Middleware 
 
@@ -24,13 +30,21 @@ app.use(express.static('public')); // In 'public' folder we can put files to hav
 // Routes
 
 app.get("/", (req, res) =>{
+
     console.log('You have accessed the index page');
     res.send("Server Working!");
+
 });
+
+// Controllers
+const seedDataController = require('./controllers/seedData.js');
+app.use('/seed', seedDataController);
+
+
 
 // Declaring Ports
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 // Database Connection
 
