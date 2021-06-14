@@ -7,7 +7,6 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const fetch = require("node-fetch");
 const methodOverride = require("method-override");
 require('dotenv').config();
 
@@ -16,9 +15,10 @@ require('dotenv').config();
 
 const app = express();
 
+
 //Importing Models
 
-const hDataStock = require('./models/hDataStock');
+// const hDataStock = require('./models/hDataStock');
 
 // Middleware 
 
@@ -37,8 +37,10 @@ app.get("/", (req, res) =>{
 });
 
 // Controllers
-const seedDataController = require('./controllers/seedData.js');
-app.use('/seed', seedDataController);
+
+const apiStockDataController = require('./controllers/ApiStock.js');
+app.use('/api', apiStockDataController);
+
 
 
 
@@ -48,7 +50,7 @@ const PORT = process.env.PORT || 3000;
 
 // Database Connection
 
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.DATABASE_URL,  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 mongoose.connection.once('open', () => {
     console.log('Linked to MongoDB')
 })
