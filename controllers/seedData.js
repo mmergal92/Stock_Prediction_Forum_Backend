@@ -1,4 +1,4 @@
-// Importing Dependencies
+Importing Dependencies
 
 const express = require('express');
 const router = express.Router();
@@ -25,51 +25,51 @@ router.get('/', (req, res) =>{
 })
 
 router.post("/", (req, res) =>{
-    // fetch('https://financialmodelingprep.com/api/v3/historical-price-full/TSLA?apikey=305952e0741dadc3ef05bf897cba9326')
-    // .then(res => res.json())
-    // .then((stockPrice) => {
+    fetch('https://financialmodelingprep.com/api/v3/historical-price-full/TSLA?apikey=305952e0741dadc3ef05bf897cba9326')
+    .then(res => res.json())
+    .then((stockPrice) => {
        
         
-    //     symbol = stockPrice.symbol;
+        symbol = stockPrice.symbol;
 
-    //     for (let apiStockArray = 0; apiStockArray < stockPrice.historical.length; apiStockArray++){
-    //         open = stockPrice.historical[apiStockArray].open;
-    //         date = stockPrice.historical[apiStockArray].date;
-    //         close = stockPrice.historical[apiStockArray].close;
-    //         changeActual = stockPrice.historical[apiStockArray].change;
-    //         changePercent = stockPrice.historical[apiStockArray].changePercent;
-    //         volume = stockPrice.historical[apiStockArray].volume;
-    //         vwap = stockPrice.historical[apiStockArray].vwap;
-    //         label = stockPrice.historical[apiStockArray].label;
+        for (let apiStockArray = 0; apiStockArray < stockPrice.historical.length; apiStockArray++){
+            open = stockPrice.historical[apiStockArray].open;
+            date = stockPrice.historical[apiStockArray].date;
+            close = stockPrice.historical[apiStockArray].close;
+            changeActual = stockPrice.historical[apiStockArray].change;
+            changePercent = stockPrice.historical[apiStockArray].changePercent;
+            volume = stockPrice.historical[apiStockArray].volume;
+            vwap = stockPrice.historical[apiStockArray].vwap;
+            label = stockPrice.historical[apiStockArray].label;
 
-    //         const seedData = () => {
+            const seedData = () => {
 
-    //             hDataStock.create([{
-    //                 symbol: symbol,
-    //                 open: open,
-    //                 date: date,
-    //                 close: close,
-    //                 changeActual: changeActual,
-    //                 changePercent: changePercent,
-    //                 volume: volume,
-    //                 vwap: vwap,
-    //                 label: label
-    //             }],(error, createdStockData) => {
-    //                 if(error){
-    //                     return console.log(error)
-    //                 }
+                hDataStock.create([{
+                    symbol: symbol,
+                    open: open,
+                    date: date,
+                    close: close,
+                    changeActual: changeActual,
+                    changePercent: changePercent,
+                    volume: volume,
+                    vwap: vwap,
+                    label: label
+                }],(error, createdStockData) => {
+                    if(error){
+                        return console.log(error)
+                    }
                     
 
-    //             })
+                })
 
-    //         }
+            }
             
 
-    //         seedData(); // At the end of the array it runs the function to add the information into the DB
+            seedData(); // At the end of the array it runs the function to add the information into the DB
 
-    //     }
+        }
     
-    // })
+    })
     
     
 });
