@@ -44,6 +44,8 @@ router.use(methodOverride('_method'))
 // Index Route
 
 router.get('/', (req, res) =>{
+    
+    console.log(req.session.test)
     res.send('Add the company stock symbol to the URL e.g. api/stock/TSLA')
 })
 
