@@ -11,14 +11,14 @@ const fetch = require("node-fetch");
 const methodOverride = require("method-override");
 require('dotenv').config();
 
-
 // Create App Object
 
 const app = express();
 
 //Importing Models
 
-const hDataStock = require('./models/hDataStock');
+// const hDataStock = require('./models/hDataStock');
+const rssFeed = require('./models/rssFeed')
 
 // Middleware 
 
@@ -37,10 +37,11 @@ app.get("/", (req, res) =>{
 });
 
 // Controllers
-const seedDataController = require('./controllers/seedData.js');
-app.use('/seed', seedDataController);
+// const seedDataController = require('./controllers/seedData.js');
+// app.use('/seed', seedDataController);
 
-
+const rssController = require('./controllers/rss.js')
+app.use('/rss', rssController);
 
 // Declaring Ports
 
@@ -48,7 +49,7 @@ const PORT = process.env.PORT || 3000;
 
 // Database Connection
 
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 mongoose.connection.once('open', () => {
     console.log('Linked to MongoDB')
 })
