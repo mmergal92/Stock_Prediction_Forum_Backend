@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const hDataStockSchema = new mongoose.Schema({
+const FordStockSchema = new mongoose.Schema({
     symbol: String,
-    date: String,
+    date: {type: String, unique: true},
     open: Number, 
     close: Number,
     changeActual: Number,
@@ -12,6 +12,6 @@ const hDataStockSchema = new mongoose.Schema({
     label: String
 }, );
 
-const hDataStock = mongoose.model('hDataStock', hDataStockSchema);
+const fordStockCollection = mongoose.model('F', FordStockSchema, 'FORD');
 
-module.exports = hDataStock;
+module.exports = fordStockCollection;

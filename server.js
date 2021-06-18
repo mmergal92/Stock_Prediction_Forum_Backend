@@ -7,13 +7,15 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const fetch = require("node-fetch");
 const methodOverride = require("method-override");
+const session = require('express-session');
+
 require('dotenv').config();
 
 // Create App Object
 
 const app = express();
+
 
 //Importing Models
 
@@ -26,11 +28,16 @@ app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 app.use(express.static('public')); // In 'public' folder we can put files to have access anywhere
-
+app.use(session({
+    secret: "supersecret",
+    resave: false,
+    saveUninitialized: false
+}))
 // Routes
 
 app.get("/", (req, res) =>{
-
+    req.session.test = 'hey'
+    console.log(req.session.test)
     console.log('You have accessed the index page');
     res.send("Server Working!");
 
@@ -39,6 +46,11 @@ app.get("/", (req, res) =>{
 // Controllers
 // const seedDataController = require('./controllers/seedData.js');
 // app.use('/seed', seedDataController);
+
+const apiStockDataController = require('./controllers/ApiStock.js');
+app.use('/api', apiStockDataController);
+
+
 
 const rssController = require('./controllers/rss.js')
 app.use('/rss', rssController);
