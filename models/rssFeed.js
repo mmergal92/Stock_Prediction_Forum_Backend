@@ -6,6 +6,6 @@ const rssFeedSchema = new mongoose.Schema({
     pubDate: String, 
 }, );
 
-const rssFeed = mongoose.model('rssFeed', rssFeedSchema);
+const rssFeed = mongoose.model('rssFeed', rssFeedSchema, "tesla");
 
 module.exports = rssFeed;
