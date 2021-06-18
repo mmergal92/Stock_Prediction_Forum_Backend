@@ -22,11 +22,6 @@ const app = express();
 // const hDataStock = require('./models/hDataStock');
 const rssFeed = require('./models/rssFeed')
 
-
-// const commentSeedData for seeding user comments:
-const commentSeedData = require('./models/commentSeedData')
-const userComment = require('./models/commentSchema')
-
 // Middleware 
 
 app.use(cors());
@@ -48,12 +43,6 @@ app.get("/", (req, res) =>{
 
 });
 
-app.get("/seedUsers", (req, res) =>{
-    userComment.create(commentSeedData, (err, createdComments) => {
-        console.log(createdComments);
-        res.redirect("/");
-    })
-})
 
 // Controllers
 // const seedDataController = require('./controllers/seedData.js');
@@ -66,6 +55,9 @@ app.use('/api', apiStockDataController);
 
 const rssController = require('./controllers/rss.js')
 app.use('/rss', rssController);
+
+const userController = require('./controllers/UserComments.js')
+app.use('/user', userController)
 
 // Declaring Ports
 
