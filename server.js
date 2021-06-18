@@ -22,6 +22,11 @@ const app = express();
 // const hDataStock = require('./models/hDataStock');
 const rssFeed = require('./models/rssFeed')
 
+
+// const commentSeedData for seeding user comments:
+const commentSeedData = require('./models/commentSeedData')
+const userComment = require('./models/commentSchema')
+
 // Middleware 
 
 app.use(cors());
@@ -42,6 +47,13 @@ app.get("/", (req, res) =>{
     res.send("Server Working!");
 
 });
+
+app.get("/seedUsers", (req, res) =>{
+    userComment.create(commentSeedData, (err, createdComments) => {
+        console.log(createdComments);
+        res.redirect("/");
+    })
+})
 
 // Controllers
 // const seedDataController = require('./controllers/seedData.js');
