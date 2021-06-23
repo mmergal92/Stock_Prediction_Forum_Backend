@@ -1,5 +1,5 @@
 const commentSeedData = [
-    {
+{
     symbol: "AMZN",
     date: "2021-06-11",
     comment: "The stock will go up tomorrow, most likely.", 
