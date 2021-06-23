@@ -5,6 +5,8 @@ const router = express.Router();
 const app = express();
 const methodOverride = require('method-override');
 const fetch = require('node-fetch');
+let bodyParser = require('body-parser');
+// const { allowedNodeEnvironmentFlags } = require('process');
 
 // User Comment Collections
 
@@ -15,33 +17,85 @@ const commentSeedData = require('../models/commentSeedData')
 
 // Middleware
 
-router.use(express.urlencoded({ extended: true }));
-router.use(methodOverride('_method'))
+router.use(express.urlencoded({ extended: true}));
+router.use(methodOverride('_method'));
+router.use(express.json({
+    type: ['application/json', 'text/plain']
+  }))
+  router.use(bodyParser.json());
 
 // Index Route
 
 router.get('/', (req, res) =>{
-    console.log(req.session.test)
-    res.send('Add the company stock symbol to the URL e.g. user/stock/TSLA')
+    // console.log(req.session.test)
+    userComment.find({}, (err, foundUserComments) => {
+        res.json(foundUserComments)
+        // res.send('This page is for the user comments.')
 })
-
-
+})
 // Seed Data Route /user/seedUsers change the URL 
+// router.get("/seedUsers", (req, res) =>{
+//     userComment.create(commentSeedData, (err, createdComments) => {
+//            console.log(createdComments);
+//         res.redirect("/");
+//     })
+// });
 
-router.get("/seedUsers", (req, res) =>{
-    userComment.create(commentSeedData, (err, createdComments) => {
-           console.log(createdComments);
-        res.redirect("/");
+// POST COMMENTS
+router.post('/', (req, res) => {
+    userComment.create([{
+        symbol: req.body.symbol,
+        date: req.body.date,
+        comment: req.body.comment,
+        username: req.body.username
+    }], (error, createdComment) => {
+        console.log("comment created" + createdComment);
+        if (error){
+            return console.log(error)
+        }
     })
+    console.log(req.body)
+    console.log('testing post')
 });
 
-// GET COMMENTS
+// Find route
+router.get('/:symbol', async(req, res) =>{
+    userComment.find({symbol: req.params.symbol}, (error, foundComments)=>{
+        console.log(req.params)
+        console.log(foundComments)
+        console.log(error)
+        res.send(foundComments)
+    }) 
+});
 
-router.get('/comments', (req, res) => {
-    userComment.find({}, (error, Data) => {
-        res.json(Data)
-    })
+// UPDATE route - EDIT
+router.get('/:id/edit', async(req, res) =>{
+    userComment.findById(req.params.id, (error, oneComment)=>{
+        console.log(req.params.id)
+        console.log(oneComment)
+        console.log(error)
+        res.send(oneComment)
+    }) 
+});
 
+// UPDATE route - PUT
+router.put('/:symbol', async(req, res) =>{
+    userComment.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedComment)=>{
+        console.log(req.params.id + " and this is the req body: " + req.body)
+        console.log(updatedComment)
+        console.log(error)
+        res.send(updatedComment)
+    }) 
+});
+
+// UPDATE route - DELETE
+router.delete('/:symbol/:id', async(req, res) =>{
+    await userComment.findOneAndRemove({_id: req.params.id}, (error, deletedComment)=>{
+        console.log({_id:req.params.id})
+        console.log(deletedComment)
+        console.log(error)
+        res.send(deletedComment)
+    }) 
 });
 
 
