@@ -56,6 +56,9 @@ app.use('/api', apiStockDataController);
 const rssController = require('./controllers/rss.js')
 app.use('/rss', rssController);
 
+const signInController = require('./controllers/signIn');
+app.use('/signIn', signInController);
+
 const userController = require('./controllers/UserComments.js')
 app.use('/user', userController)
 
