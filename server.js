@@ -20,7 +20,7 @@ const app = express();
 //Importing Models
 
 // const hDataStock = require('./models/hDataStock');
-const rssFeed = require('./models/rssFeed')
+const rssFeed = require('./models/rssFeed.js')
 
 // Middleware 
 
@@ -56,7 +56,7 @@ app.use('/api', apiStockDataController);
 const rssController = require('./controllers/rss.js')
 app.use('/rss', rssController);
 
-const signInController = require('./controllers/signIn');
+const signInController = require('./controllers/signIn.js');
 app.use('/signIn', signInController);
 
 const userController = require('./controllers/UserComments.js')

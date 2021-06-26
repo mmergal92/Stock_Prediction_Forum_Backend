@@ -13,7 +13,7 @@ let bodyParser = require('body-parser');
 const userComment = require('../models/commentSchema.js');
 
 // const commentSeedData for seeding user comments:
-const commentSeedData = require('../models/commentSeedData')
+const commentSeedData = require('../models/commentSeedData.js')
 
 // Middleware
 

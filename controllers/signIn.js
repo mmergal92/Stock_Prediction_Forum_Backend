@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const methodOverride = require('method-override');
-const userAccountCollection = require('../models/useraccounts/userAccountData')
+const userAccountCollection = require('../models/useraccounts/userAccountData.js')
 // const bodyParser = require('body-parser')
 let bodyParser = require('body-parser');
 
