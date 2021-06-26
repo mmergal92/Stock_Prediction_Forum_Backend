@@ -28,6 +28,7 @@ res.send('hi')
 })
 
 router.post('/', (req, res) =>{
+    console.log(req.body)
     userAccountCollection.find({email: req.body.email}, function (error, userAccount) {
         if(!userAccount.length){
             userAccountCollection.create([{

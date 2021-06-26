@@ -39,13 +39,13 @@ router.get('/', (req, res) =>{
 //            console.log(createdComments);
 //         res.redirect("/");
 //     })
-// });
+// }); 
 
 // POST COMMENTS
 router.post('/', (req, res) => {
     userComment.create([{
         symbol: req.body.symbol,
-        date: req.body.date,
+        date: new Date(Date.now()).toLocaleString(),
         comment: req.body.comment,
         username: req.body.username
     }], (error, createdComment) => {
@@ -54,16 +54,16 @@ router.post('/', (req, res) => {
             return console.log(error)
         }
     })
-    console.log(req.body)
-    console.log('testing post')
+    // console.log(req.body)
+    // console.log('testing post')
 });
 
 // Find route
 router.get('/:symbol', async(req, res) =>{
-    userComment.find({symbol: req.params.symbol}, (error, foundComments)=>{
-        console.log(req.params)
-        console.log(foundComments)
-        console.log(error)
+    await userComment.find({symbol: req.params.symbol}, (error, foundComments)=>{
+        // console.log(req.params)
+        // console.log(foundComments)
+        // console.log(error)
         res.send(foundComments)
     }) 
 });
@@ -71,9 +71,9 @@ router.get('/:symbol', async(req, res) =>{
 // UPDATE route - EDIT
 router.get('/:id/edit', async(req, res) =>{
     userComment.findById(req.params.id, (error, oneComment)=>{
-        console.log(req.params.id)
-        console.log(oneComment)
-        console.log(error)
+        // console.log(req.params.id)
+        // console.log(oneComment)
+        // console.log(error)
         res.send(oneComment)
     }) 
 });
@@ -81,9 +81,9 @@ router.get('/:id/edit', async(req, res) =>{
 // UPDATE route - PUT
 router.put('/:symbol', async(req, res) =>{
     userComment.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedComment)=>{
-        console.log(req.params.id + " and this is the req body: " + req.body)
-        console.log(updatedComment)
-        console.log(error)
+        // console.log(req.params.id + " and this is the req body: " + req.body)
+        // console.log(updatedComment)
+        // console.log(error)
         res.send(updatedComment)
     }) 
 });
@@ -91,9 +91,9 @@ router.put('/:symbol', async(req, res) =>{
 // UPDATE route - DELETE
 router.delete('/:symbol/:id', async(req, res) =>{
     await userComment.findOneAndRemove({_id: req.params.id}, (error, deletedComment)=>{
-        console.log({_id:req.params.id})
-        console.log(deletedComment)
-        console.log(error)
+        // console.log({_id:req.params.id})
+        // console.log(deletedComment)
+        // console.log(error)
         res.send(deletedComment)
     }) 
 });

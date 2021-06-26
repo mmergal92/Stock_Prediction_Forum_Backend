@@ -62,13 +62,19 @@ app.use('/signIn', signInController);
 const userController = require('./controllers/UserComments.js')
 app.use('/user', userController)
 
+const likeController = require('./controllers/Like.js')
+app.use('/like', likeController)
+
+const disLikeController = require('./controllers/Dislike.js')
+app.use('/dislike', disLikeController)
+
 // Declaring Ports
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Database Connection
 
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+mongoose.connect(process.env.DATABASE_URL_TEST, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 mongoose.connection.once('open', () => {
     console.log('Linked to MongoDB')
 })
