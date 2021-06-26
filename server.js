@@ -74,7 +74,7 @@ const PORT = process.env.PORT || 3001;
 
 // Database Connection
 
-mongoose.connect(process.env.DATABASE_URL_TEST, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 mongoose.connection.once('open', () => {
     console.log('Linked to MongoDB')
 })
