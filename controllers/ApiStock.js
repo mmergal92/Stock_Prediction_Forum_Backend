@@ -6,6 +6,8 @@ const hDataStock = require('../models/stockprice/hDataStock.js');
 const app = express();
 const methodOverride = require('method-override');
 const fetch = require('node-fetch');
+const schedule = require('node-schedule');
+
 
 // Stock Collections
 
@@ -27,8 +29,70 @@ const netflixStockCollection = require('../models/stockprice/netflixStockData.js
 router.use(express.urlencoded({ extended: true }));
 router.use(methodOverride('_method'))
 
+//Midnight Fun
 
-// Variables used to seed Data
+schedule.scheduleJob('0 18 * * *', async () =>{
+    
+    let response = await fetch('https://financialmodelingprep.com/api/v3/quote-short/AAPL,AMZN,BA,EBAY,F,MSFT,NFLX,QCOM,TSLA,TWTR?apikey=305952e0741dadc3ef05bf897cba9326');
+    let data = await response.json();
+
+    await appleCollection.create([{
+        symbol: data[0].symbol,
+        close: data[0].price,
+        date: new Date(Date.now()).toLocaleDateString()
+    }])
+
+    await amazonStockCollection.create([{
+        symbol: data[1].symbol,
+        close: data[1].price,
+        date: new Date(Date.now()).toLocaleDateString()
+    }])
+
+    await boeingStockCollection.create([{
+        symbol: data[2].symbol,
+        close: data[2].price,
+        date: new Date(Date.now()).toLocaleDateString()
+    }])
+
+    await ebayStockCollection.create([{
+        symbol: data[3].symbol,
+        close: data[3].price,
+        date: new Date(Date.now()).toLocaleDateString()
+    }])
+
+    await fordStockCollection.create([{
+        symbol: data[4].symbol,
+        close: data[4].price,
+        date: new Date(Date.now()).toLocaleDateString()
+    }])
+
+    await microsoftStockCollection.create([{
+        symbol: data[5].symbol,
+        close: data[5].price,
+        date: new Date(Date.now()).toLocaleDateString()
+    }])
+    
+    await netflixStockCollection.create([{
+        symbol: data[6].symbol,
+        close: data[6].price,
+        date: new Date(Date.now()).toLocaleDateString()
+    }])
+
+    await qualcommStockCollection.create([{
+        symbol: data[7].symbol,
+        close: data[7].price,
+        date: new Date(Date.now()).toLocaleDateString()
+    }])
+
+    await teslaStockCollection.create([{
+        symbol: data[8].symbol,
+        close: data[8].price,
+        date: new Date(Date.now()).toLocaleDateString()
+    }])
+
+})
+
+// Variables used to seed Data https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?from=2021-05-26&to=2021-06-26&apikey=305952e0741dadc3ef05bf897cba9326
 
 // let open;
 // let symbol;
@@ -54,56 +118,56 @@ router.get('/', (req, res) =>{
 
 router.get("/go", (req, res) =>{
 
-    //UNCOMMENT THIS TO SEED NEW DATA
+    // UNCOMMENT THIS TO SEED NEW DATA
 
-    // console.log('correct page')
-    // fetch('https://financialmodelingprep.com/api/v3/historical-price-full/NFLX?apikey=305952e0741dadc3ef05bf897cba9326')
-    // .then(res => res.json())
-    // .then((stockPrice) => {
+    console.log('correct page')
+    fetch('https://financialmodelingprep.com/api/v3/historical-price-full/TWTR?from=2021-05-26&to=2021-06-26&apikey=305952e0741dadc3ef05bf897cba9326')
+    .then(res => res.json())
+    .then((stockPrice) => {
        
         
-    //     symbol = stockPrice.symbol;
+        symbol = stockPrice.symbol;
 
-    //     for (let apiStockArray = 0; apiStockArray < stockPrice.historical.length; apiStockArray++){
-    //         open = stockPrice.historical[apiStockArray].open;
-    //         date = stockPrice.historical[apiStockArray].date;
-    //         close = stockPrice.historical[apiStockArray].close;
-    //         changeActual = stockPrice.historical[apiStockArray].change;
-    //         changePercent = stockPrice.historical[apiStockArray].changePercent;
-    //         volume = stockPrice.historical[apiStockArray].volume;
-    //         vwap = stockPrice.historical[apiStockArray].vwap;
-    //         label = stockPrice.historical[apiStockArray].label;
+        for (let apiStockArray = 0; apiStockArray < stockPrice.historical.length; apiStockArray++){
+            open = stockPrice.historical[apiStockArray].open;
+            date = stockPrice.historical[apiStockArray].date;
+            close = stockPrice.historical[apiStockArray].close;
+            changeActual = stockPrice.historical[apiStockArray].change;
+            changePercent = stockPrice.historical[apiStockArray].changePercent;
+            volume = stockPrice.historical[apiStockArray].volume;
+            vwap = stockPrice.historical[apiStockArray].vwap;
+            label = stockPrice.historical[apiStockArray].label;
 
-    //         const seedData = () => {
+            const seedData = () => {
 
-    //             hDataStock.create([{
-    //                 symbol: symbol,
-    //                 open: open,
-    //                 date: date,
-    //                 close: close,
-    //                 changeActual: changeActual,
-    //                 changePercent: changePercent,
-    //                 volume: volume,
-    //                 vwap: vwap,
-    //                 label: label
-    //             }],(error, createdStockData) => {
+                twitterStockCollection.create([{
+                    symbol: symbol,
+                    open: open,
+                    date: date,
+                    close: close,
+                    changeActual: changeActual,
+                    changePercent: changePercent,
+                    volume: volume,
+                    vwap: vwap,
+                    label: label
+                }],(error, createdStockData) => {
 
-    //                 console.log(`Seeding ${symbol} Data Now ${date}`)
-    //                 if(error){
-    //                     return console.log(error)
-    //                 }
+                    console.log(`Seeding ${symbol} Data Now ${date}`)
+                    if(error){
+                        return console.log(error)
+                    }
                     
 
-    //             })
+                })
 
-    //         }
+            }
             
            
-    //         seedData(); // At the end of the array it runs the function to add the information into the DB
+            seedData(); // At the end of the array it runs the function to add the information into the DB
 
-    //     }
-    //     console.log('Data Fully Seeded')
-    // })
+        }
+        console.log('Data Fully Seeded')
+    })
     
     
 });
@@ -517,6 +581,9 @@ router.get("/test", (req, res) => {
 // // getSentimentofTitles(var3)
 // // console.log(var4)
 });
+
+/// Midnight Fun
+
 
 
 
