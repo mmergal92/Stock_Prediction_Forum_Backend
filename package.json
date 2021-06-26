@@ -4,8 +4,8 @@
   "description": "Group III Backend Server",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "nodemon --exec npm start"
   },
   "author": "Maria Mergal, Jorge Caridad and Chris Filippo",
   "license": "ISC",
