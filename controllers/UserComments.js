@@ -47,6 +47,7 @@ router.post('/', (req, res) => {
         symbol: req.body.symbol,
         date: new Date(Date.now()).toLocaleString(),
         comment: req.body.comment,
+        profilepic: req.body.profilepic,
         username: req.body.username
     }], (error, createdComment) => {
         console.log("comment created" + createdComment);
