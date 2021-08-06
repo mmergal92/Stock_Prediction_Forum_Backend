@@ -68,13 +68,19 @@ app.use('/like', likeController)
 const disLikeController = require('./controllers/Dislike.js')
 app.use('/dislike', disLikeController)
 
+const newsAnalysisController = require('./controllers/NewsAnalysis.js')
+app.use('/newsscore', newsAnalysisController)
+
+const predictionAccuracy = require('./controllers/PredictionAccuracy.js')
+app.use('/prediction', predictionAccuracy)
+
 // Declaring Ports
 
 const PORT = process.env.PORT || 3001;
 
 // Database Connection
 
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+mongoose.connect(process.env.DATABASE_URL_TEST, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 mongoose.connection.once('open', () => {
     console.log('Linked to MongoDB')
 })

@@ -22,7 +22,7 @@ router.use(methodOverride('_method'))
 // api_key= elfx2znmtuaddonhzcoua4nmi8ydfhtsdru8twdo
 
 // router.get("/", (req, res) =>{
-// fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.google.com%2Frss%2Fsearch%3Fq%3DTesla%2Bafter%3A2021-03-29%2Bbefore%3A2021-06-14%26ceid%3DUS%3Aen%26hl%3Den-US%26gl%3DUS&api_key=l6cznbmdc52lrx9jqcdehgxbuvakchanxgbbb9gy&count=100')
+// fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.google.com%2Frss%2Fsearch%3Fq%3DTesla%2Bafter%3A2021-03-29%2Bbefore%3A2021-06-14%26ceid%3DUS%3Aen%26hl%3Den-US%26gl%3DUS&api_key=REMOVED&count=100')
 // .then(res => res.json())
 // .then((rssNewsInfo) =>{
 // console.log(rssNewsInfo);

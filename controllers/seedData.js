@@ -25,7 +25,7 @@ router.get('/', (req, res) =>{
 })
 
 router.post("/", (req, res) =>{
-    fetch('https://financialmodelingprep.com/api/v3/historical-price-full/TSLA?apikey=305952e0741dadc3ef05bf897cba9326')
+    fetch(`https://financialmodelingprep.com/api/v3/historical-price-full/TSLA?apikey=${process.env.OLD_API_KEY}`)
     .then(res => res.json())
     .then((stockPrice) => {
        

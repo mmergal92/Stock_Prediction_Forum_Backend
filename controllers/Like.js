@@ -9,6 +9,7 @@ let bodyParser = require('body-parser');
 const schedule = require('node-schedule');
 const likes = require('../models/likeanddislike/likeData.js')
 const dislikes = require('../models/likeanddislike/dislikeData.js')
+const axios = require('axios')
 
 
 router.use(express.urlencoded({ extended: true}));
@@ -33,7 +34,8 @@ router.use(express.json({
 
 
 router.get('/give', (req, res) =>{
-    
+  
+
     likes.find({}, (error, foundlike) =>{
       res.json(foundlike)
     })

@@ -33,10 +33,10 @@ router.use(methodOverride('_method'))
 
 schedule.scheduleJob('0 18 * * *', async () =>{
     
-    let response = await fetch('https://financialmodelingprep.com/api/v3/quote-short/AAPL,AMZN,BA,EBAY,F,MSFT,NFLX,QCOM,TSLA,TWTR?apikey=305952e0741dadc3ef05bf897cba9326');
+    let response = await fetch(`https://financialmodelingprep.com/api/v3/quote-short/AAPL,AMZN,BA,EBAY,F,MSFT,NFLX,QCOM,TSLA,TWTR?apikey=${process.env.OLD_API_KEY}`);
     let data = await response.json();
 
-    await appleCollection.create([{
+    await appleStockCollection.create([{
         symbol: data[0].symbol,
         close: data[0].price,
         date: new Date(Date.now()).toLocaleDateString()
@@ -92,7 +92,7 @@ schedule.scheduleJob('0 18 * * *', async () =>{
 
 })
 
-// Variables used to seed Data https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?from=2021-05-26&to=2021-06-26&apikey=305952e0741dadc3ef05bf897cba9326
+
 
 // let open;
 // let symbol;
@@ -121,7 +121,7 @@ router.get("/go", (req, res) =>{
     // UNCOMMENT THIS TO SEED NEW DATA
 
     console.log('correct page')
-    fetch('https://financialmodelingprep.com/api/v3/historical-price-full/TWTR?from=2021-05-26&to=2021-06-26&apikey=305952e0741dadc3ef05bf897cba9326')
+    fetch(`https://financialmodelingprep.com/api/v3/historical-price-full/TWTR?from=2021-05-26&to=2021-06-26&apikey=${process.env.OLD_API_KEY}`)
     .then(res => res.json())
     .then((stockPrice) => {
        
@@ -452,7 +452,7 @@ router.get("/test", (req, res) => {
 // const response = await fetch(`https://twinword-sentiment-analysis.p.rapidapi.com/analyze/?text=${text}`, {
 // 	"method": "GET",
 // 	"headers": {
-// 		"x-rapidapi-key": "72f50517f2mshc36070332df1ebcp1e748djsndf6e61a62301",
+// 		"x-rapidapi-key": "REMOVED",
 // 		"x-rapidapi-host": "twinword-sentiment-analysis.p.rapidapi.com"
 // 	}
 // })
